@@ -1,6 +1,6 @@
 {
   "name": "node-auto-repair",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Automatically detect unhealthy Kubernetes nodes and repair them",
   "homepage": "https://github.com/Nicklason/node-auto-repair",
   "repository": {
