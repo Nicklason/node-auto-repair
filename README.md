@@ -4,8 +4,7 @@ Automatically detect unhealthy Kubernetes nodes and repair them.
 
 ## Inspiration
 
-Google Kubernetes Engine can [automatically repair unhealthy nodes](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair)
-them and then replacing them with a new node. This might not be possible when
+Google Kubernetes Engine can [automatically repair unhealthy nodes](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair) and then replacing them with a new node. This might not be possible when
 running Kubernetes on-premise. Instead of replacing the nodes, an attempt to repair
 them can be made by first identifying the problem, and then attempting to repair it.
 
