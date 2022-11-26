@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Nicklason/node-auto-repair/compare/v1.0.2...v1.1.0) (2022-11-26)
+
+
+### Features
+
+* wait for nodes to be repaired before continuing ([3b8ed9e](https://github.com/Nicklason/node-auto-repair/commit/3b8ed9ebb0fcbed0971e33e5a81eead0b08242eb))
+
 ## [1.0.2](https://github.com/Nicklason/node-auto-repair/compare/v1.0.1...v1.0.2) (2022-08-21)
 
 
