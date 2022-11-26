@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Nicklason/node-auto-repair/compare/v1.1.0...v1.1.1) (2022-11-26)
+
+
+### Bug Fixes
+
+* gracefully stop ([0206ae5](https://github.com/Nicklason/node-auto-repair/commit/0206ae5b30656548f6318960d1d34fa8a88f5514))
+
 # [1.1.0](https://github.com/Nicklason/node-auto-repair/compare/v1.0.2...v1.1.0) (2022-11-26)
 
 
