@@ -72,8 +72,19 @@ export class NodeAutoRepair {
    * Cleans up by stoping to watch for node changes and stops repairing new nodes
    */
   stop(): Promise<void> {
-    this.repairQueue.clear();
-    return this.informer.stop();
+    // Pause the queue to prevent more repair attempts from being made
+    this.repairQueue.pause();
+    // Stop informer to prevent more nodes from being added to the repair queue
+    return this.informer.stop().then(() => {
+      // Clear all timeouts
+      Object.values(this.brokenNodes).forEach((v) => {
+        clearTimeout(v.timeout);
+      });
+      // Clear the queue
+      this.repairQueue.clear();
+      // Clear the broken nodes object
+      this.brokenNodes = {};
+    });
   }
 
   /**
