@@ -55,7 +55,7 @@ export class NodeAutoRepair {
     this.autoRepair = autoRepair;
     this.options = options;
 
-    this.repairQueue = new PQueue({ concurrency: this.options.concurrency });
+    this.repairQueue = new PQueue({ concurrency: 1 });
     this.repairQueue.pause();
   }
 
@@ -121,7 +121,20 @@ export class NodeAutoRepair {
         this.autoRepair.repairSuccess(node, brokenNode.attempts);
       }
       delete this.brokenNodes[name];
+
+      // Resume queue if there are no more broken nodes with attempts
+      if (
+        this.repairQueue.isPaused &&
+        this.getBrokenNodesWithAttemptsCount() < this.options.concurrency
+      ) {
+        this.repairQueue.start();
+      }
     }
+  }
+
+  private getBrokenNodesWithAttemptsCount(): number {
+    return Object.values(this.brokenNodes).filter((node) => node.attempts > 0)
+      .length;
   }
 
   /**
@@ -176,6 +189,15 @@ export class NodeAutoRepair {
           retry = false;
           this.handleHealthyNode(refreshedNode);
         } else {
+          // Check if there are too many nodes being repaired
+          if (
+            this.getBrokenNodesWithAttemptsCount() + 1 >
+            this.options.concurrency
+          ) {
+            // Pause queue to prevent too many concurrent repairs
+            this.repairQueue.pause();
+          }
+
           return this.repairQueue.add(() => {
             // Attempt to repair the node
             brokenNode.attempts++;
